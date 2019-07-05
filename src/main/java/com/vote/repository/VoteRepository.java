@@ -13,11 +13,11 @@ public interface VoteRepository extends PagingAndSortingRepository<Vote, Long> {
 
     List<Vote> findAllByVoterAndIsDeleted(String voter,Boolean isDeleted);
 
-    void deleteAllByVoter(String ip);
+    void deleteAllByVoter(String voter);
 
     @Modifying
-    @Query("update Vote v set v.isDeleted = true where ip=?1")
-    void updateIsDeleted(String ip);
+    @Query("update Vote v set v.isDeleted = true where voter=?1")
+    void updateIsDeleted(String voter);
 
     @Query(value = "select count(v) as voteCount, v.selection from Vote v where v.isDeleted<>1 group by v.selection")
     List<?> getVotesCountGroupBySelection();
