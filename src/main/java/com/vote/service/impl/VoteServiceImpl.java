@@ -25,9 +25,7 @@ public class VoteServiceImpl {
     public void createVotes(@RequestBody List<String> voteNames) {
 
         String voter = getVoter();
-
         deleteVotesIfExists(voter);
-
         addVotes(voteNames, voter);
     }
 
