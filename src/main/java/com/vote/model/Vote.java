@@ -9,7 +9,6 @@ public class Vote {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id", nullable = false, updatable = false)
     private Long id;
-
     @Column
     private String voter;
     @Column
