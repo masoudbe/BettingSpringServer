@@ -29,7 +29,7 @@ public class VoteServiceImpl {
         addVotes(voteNames, voter);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "http://localhost:3333")
     @GetMapping(path = "/api/getVotes", produces = "application/json")
     public List<String> getVotes() {
 
