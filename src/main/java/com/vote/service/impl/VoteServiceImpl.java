@@ -24,18 +24,18 @@ public class VoteServiceImpl {
     @PostMapping(path = "/api/createVotes", consumes = "application/json")
     public void createVotes(@RequestBody List<String> voteNames) {
 
-        String ip = getIpAddress();
+        String voter = getVoter();
 
-        deleteVotesIfExists(ip);
+        deleteVotesIfExists(voter);
 
-        addVotes(voteNames, ip);
+        addVotes(voteNames, voter);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(path = "/api/getVotes", produces = "application/json")
     public List<String> getVotes() {
 
-        String ip = getIpAddress();
+        String ip = getVoter();
 
         List<Vote> votes = voteRepository.findAllByVoterAndIsDeleted(ip,false);
         List<String> voteString = new ArrayList<>();
@@ -58,7 +58,7 @@ public class VoteServiceImpl {
         return "connection is successful";
     }
 
-    private String getIpAddress() {
+    private String getVoter() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
                 .getRequest();
 
