@@ -5,37 +5,35 @@ import java.util.Date;
 
 @Entity
 public class Vote {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id", nullable = false, updatable = false)
     private Long id;
 
     @Column
-    private String ip;
+    private String voter;
     @Column
     private Date createDate;
     @Column
-    private String name;
+    private String selection;
     @Column
     private Boolean isDeleted;
 
     public Vote() {
     }
 
-    public Vote(String ip, Date createDate, String name) {
-        this.ip = ip;
+    public Vote(String voter, Date createDate, String selection) {
+        this.voter = voter;
         this.createDate = createDate;
-        this.name = name;
+        this.selection = selection;
     }
 
-    public String getIp() {
-        return ip;
+    public String getVoter() {
+        return voter;
     }
 
-    public void setIp(String ip) {
-        this.ip = ip;
+    public void setVoter(String voter) {
+        this.voter = voter;
     }
 
     public Date getCreateDate() {
@@ -46,12 +44,12 @@ public class Vote {
         this.createDate = createDate;
     }
 
-    public String getName() {
-        return name;
+    public String getSelection() {
+        return selection;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSelection(String selection) {
+        this.selection = selection;
     }
 
 

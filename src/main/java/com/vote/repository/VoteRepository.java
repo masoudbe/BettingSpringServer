@@ -11,15 +11,15 @@ import java.util.List;
 @Repository
 public interface VoteRepository extends PagingAndSortingRepository<Vote, Long> {
 
-    List<Vote> findAllByIpAndIsDeleted(String ip,Boolean isDeleted);
+    List<Vote> findAllByVoterAndIsDeleted(String voter,Boolean isDeleted);
 
-    void deleteAllByIp(String ip);
+    void deleteAllByVoter(String ip);
 
     @Modifying
     @Query("update Vote v set v.isDeleted = true where ip=?1")
     void updateIsDeleted(String ip);
 
-    @Query(value = "select count(v) as cnt, v.name from Vote v where v.isDeleted<>1 group by v.name")
-    List<?> getNamesGroupByName();
+    @Query(value = "select count(v) as voteCount, v.selection from Vote v where v.isDeleted<>1 group by v.selection")
+    List<?> getVotesCountGroupBySelection();
 
 }

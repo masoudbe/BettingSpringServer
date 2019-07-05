@@ -19,6 +19,45 @@ public class VoteServiceImpl {
     @Autowired
     private VoteRepository voteRepository;
 
+    @Transactional
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping(path = "/api/createVotes", consumes = "application/json")
+    public void createVotes(@RequestBody List<String> voteNames) {
+
+        String ip = getIpAddress();
+
+        deleteVotesIfExists(ip);
+
+        addVotes(voteNames, ip);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping(path = "/api/getVotes", produces = "application/json")
+    public List<String> getVotes() {
+
+        String ip = getIpAddress();
+
+        List<Vote> votes = voteRepository.findAllByVoterAndIsDeleted(ip,false);
+        List<String> voteString = new ArrayList<>();
+        for (Vote vote : votes) {
+            voteString.add(vote.getSelection());
+        }
+        return voteString;
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping(path = "/api/getVotesCountGroupBySelection", produces = "application/json")
+    public List<?> getVotesCountGroupBySelection() {
+       return voteRepository.getVotesCountGroupBySelection();
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @org.springframework.transaction.annotation.Transactional
+    @GetMapping(path = "/isConnect")
+    public String isConnect() {
+        return "connection is successful";
+    }
+
     private String getIpAddress() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
                 .getRequest();
@@ -29,42 +68,6 @@ public class VoteServiceImpl {
         return request.getRemoteAddr();
     }
 
-
-
-
-    @Transactional
-    @CrossOrigin(origins = "http://localhost:4200")
-    @PostMapping(path = "/api/createVote", consumes = "application/json")
-    public void createVote(@RequestBody List<String> voteNames) {
-
-        String ip = getIpAddress();
-
-        deleteVotesIfExists(ip);
-
-        addVotes(voteNames, ip);
-    }
-
-
-    @GetMapping(path = "/api/getVotes", produces = "application/json")
-    public List<String> getVotes() {
-
-        String ip = getIpAddress();
-
-        List<Vote> votes = voteRepository.findAllByIpAndIsDeleted(ip,false);
-        List<String> voteString = new ArrayList<>();
-        for (Vote vote : votes) {
-            voteString.add(vote.getName());
-        }
-        return voteString;
-    }
-
-    @GetMapping(path = "/api/getNamesGroupByName", produces = "application/json")
-    public List<?> getNamesGroupByName() {
-       return voteRepository.getNamesGroupByName();
-    }
-
-
-
     private void addVotes(@RequestBody List<String> voteNames, String ip) {
         for (String innerName : voteNames) {
             voteRepository.save(new Vote(ip, new Date(), innerName));
@@ -72,14 +75,6 @@ public class VoteServiceImpl {
     }
 
     private void deleteVotesIfExists(String ip) {
-            voteRepository.updateIsDeleted(ip);
+        voteRepository.updateIsDeleted(ip);
     }
-
-    @org.springframework.transaction.annotation.Transactional
-    @GetMapping(path = "/isConnect")
-    public String isConnect() {
-        return "connection is successful";
-    }
-
-
 }
