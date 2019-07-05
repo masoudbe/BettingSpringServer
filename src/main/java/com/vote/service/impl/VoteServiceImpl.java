@@ -33,13 +33,14 @@ public class VoteServiceImpl {
     @GetMapping(path = "/api/getVotes", produces = "application/json")
     public List<String> getVotes() {
 
-        String ip = getVoter();
+        String voter = getVoter();
 
-        List<Vote> votes = voteRepository.findAllByVoterAndIsDeleted(ip,false);
+        List<Vote> votes = voteRepository.findAllByVoterAndIsDeleted(voter,false);
         List<String> voteString = new ArrayList<>();
         for (Vote vote : votes) {
             voteString.add(vote.getSelection());
         }
+        voteString.add("C4");
         return voteString;
     }
 
