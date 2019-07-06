@@ -20,7 +20,7 @@ public class VoteServiceImpl {
     private VoteRepository voteRepository;
 
     @Transactional
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin
     @PostMapping(path = "/api/createVotes", consumes = "application/json")
     public void createVotes(@RequestBody List<String> voteNames) {
 
@@ -29,7 +29,7 @@ public class VoteServiceImpl {
         addVotes(voteNames, voter);
     }
 
-    @CrossOrigin(origins = "http://localhost:3333")
+    @CrossOrigin
     @GetMapping(path = "/api/getVotes", produces = "application/json")
     public List<String> getVotes() {
 
@@ -44,13 +44,13 @@ public class VoteServiceImpl {
         return voteString;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin
     @GetMapping(path = "/api/getVotesCountGroupBySelection", produces = "application/json")
     public List<?> getVotesCountGroupBySelection() {
        return voteRepository.getVotesCountGroupBySelection();
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin
     @org.springframework.transaction.annotation.Transactional
     @GetMapping(path = "/isConnect")
     public String isConnect() {
