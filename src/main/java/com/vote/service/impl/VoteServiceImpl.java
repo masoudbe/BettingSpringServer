@@ -52,7 +52,7 @@ public class VoteServiceImpl {
 
     @CrossOrigin
     @org.springframework.transaction.annotation.Transactional
-    @GetMapping(path = "/isConnect")
+    @GetMapping(path = "/api/isConnect")
     public String isConnect() {
         return "connection is successful";
     }
