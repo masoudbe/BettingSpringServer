@@ -15,7 +15,7 @@ public class Vote {
     private Date createDate;
     @Column
     private String selection;
-    @Column
+    @Column(columnDefinition = "bit(1) default 0", nullable = false)
     private Boolean isDeleted;
 
     public Vote() {
@@ -25,6 +25,7 @@ public class Vote {
         this.voter = voter;
         this.createDate = createDate;
         this.selection = selection;
+        this.isDeleted = false;
     }
 
     public String getVoter() {
