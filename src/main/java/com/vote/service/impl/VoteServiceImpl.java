@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-@CrossOrigin(origins = {"http://192.168.151.87:3333", "http://localhost:3333", "http://192.168.151.87:4200", "http://localhost:4200"})
 @RestController
 public class VoteServiceImpl {
 
