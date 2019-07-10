@@ -59,6 +59,7 @@ public class VoteServiceImpl {
         LOGGER.info("End--> VoteServiceImpl.createVote()");
     }
 
+
     @GetMapping(path = "/api/getVotesCountGroupBySelection", produces = "application/json")
     public List<?> getVotesCountGroupBySelection() {
         LOGGER.info("Start--> VoteServiceImpl.getNamesGroupByName()");
