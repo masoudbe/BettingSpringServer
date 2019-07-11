@@ -36,8 +36,8 @@ public class VoteServiceImpl {
         LOGGER.info("Start--> VoteServiceImpl.getVotes()");
         String voter = getVoter();
         LOGGER.info("voter--> VoteServiceImpl.getVotes()"+voter);
-//        if(!validateVoter(voter))
-//            return null;
+        if(!validateVoter(voter))
+            return null;
         List<Vote> votes = voteRepository.findAllByVoterAndIsDeleted(voter, false);
         List<String> voteString = new ArrayList<>();
         for (Vote vote : votes) {
@@ -53,8 +53,8 @@ public class VoteServiceImpl {
         LOGGER.info("Start--> VoteServiceImpl.createVote()");
         String voter = getVoter();
         LOGGER.info("voter--> VoteServiceImpl.createVote()"+ voter);
-//        if(voteNames.size() == 0 || !validateVoter(voter))
-//            return;
+        if(voteNames.size() == 0 || !validateVoter(voter))
+            return;
         deleteVotesIfExists(voter, voteNames.get(0).length());
         addVotes(voteNames, voter);
         LOGGER.info("End--> VoteServiceImpl.createVote()");
