@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @EntityScan(basePackages = {"com.vote.model"})
 public class VoteApplication {
     //TestAmin
+    //SecondTestAmin
     public static void main(String[] args) {
         SpringApplication.run(VoteApplication.class, args);
     }
