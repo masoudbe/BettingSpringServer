@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @EnableJpaRepositories(basePackages = {"com.vote.repository"})
 @EntityScan(basePackages = {"com.vote.model"})
 public class VoteApplication {
-    //TestAmin
-    //SecondTestAmin
-    //ThirdTest
+
     public static void main(String[] args) {
         SpringApplication.run(VoteApplication.class, args);
     }
